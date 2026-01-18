@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bswsyja2w6tif"]
+
+[ext_resource type="AudioStream" uid="uid://ds5xmmape0khm" path="res://audio/Relaxing Guitar Music - Dance of Strings [Copyright Free Background Music] [TubeRipper.com].mp3" id="1_bgyvi"]
+
+[node name="gutaradio" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_bgyvi")
+autoplay = true
+bus = &"guitar"

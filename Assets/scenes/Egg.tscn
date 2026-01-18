@@ -1,0 +1,205 @@
+[gd_scene load_steps=23 format=3 uid="uid://bqxqekqpuw2fs"]
+
+[ext_resource type="Script" path="res://Scripts/Egg.gd" id="1_idnle"]
+[ext_resource type="Texture2D" uid="uid://cxnpefkmtntu7" path="res://Assets/Egg.png" id="1_uq35v"]
+[ext_resource type="Texture2D" uid="uid://dbavm4ainfa3o" path="res://Assets/EggRespawnAnimation/Egg.png" id="2_8sbfj"]
+[ext_resource type="AudioStream" uid="uid://drquxhd7oh77l" path="res://audio/pop sound.mp3" id="4_1cb5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_por10"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(0, 0, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2ft2"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(128, 0, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epmjf"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(256, 0, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wcue"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(384, 0, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfwtn"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(0, 157, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yspt"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(128, 157, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkkbi"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(256, 157, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xfgy"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(384, 157, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sthe"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(0, 314, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssgy8"]
+atlas = ExtResource("2_8sbfj")
+region = Rect2(128, 314, 128, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl26s"]
+atlas = ExtResource("1_uq35v")
+region = Rect2(0, 0, 67, 82)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x5ne7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_por10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2ft2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epmjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wcue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfwtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yspt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkkbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xfgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sthe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssgy8")
+}],
+"loop": false,
+"name": &"EggRespawn",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl26s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Animation" id="Animation_8ktp5"]
+resource_name = "EggRespawn"
+
+[sub_resource type="Animation" id="Animation_f1i64"]
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_da0ms"]
+resource_name = "rotation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.5664]
+}
+
+[sub_resource type="Animation" id="Animation_7pkkx"]
+resource_name = "touch"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.385718, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(4, 3), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o8uns"]
+_data = {
+"EggRespawn": SubResource("Animation_8ktp5"),
+"RESET": SubResource("Animation_f1i64"),
+"rotation": SubResource("Animation_da0ms"),
+"touch": SubResource("Animation_7pkkx")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xu2es"]
+radius = 3.2639
+
+[node name="Egg" type="CharacterBody2D"]
+script = ExtResource("1_idnle")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_x5ne7")
+animation = &"idle"
+frame_progress = 0.473744
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o8uns")
+}
+speed_scale = 0.8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 30)
+scale = Vector2(0.666667, 0.777778)
+shape = SubResource("CircleShape2D_xu2es")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1cb5r")
+bus = &"pop"

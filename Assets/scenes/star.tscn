@@ -1,0 +1,160 @@
+[gd_scene load_steps=16 format=3 uid="uid://doovdefg0vpej"]
+
+[ext_resource type="Texture2D" uid="uid://du2anj24jicoc" path="res://Assets/EggRespawnAnimation/starRotation.png" id="1_1wly8"]
+[ext_resource type="Script" path="res://Scripts/star.gd" id="1_is4h6"]
+[ext_resource type="AudioStream" uid="uid://e44cdat4ic7d" path="res://audio/coin.wav" id="3_ooit1"]
+[ext_resource type="FontFile" uid="uid://beac1nd8e003m" path="res://Assets/CHICKEN Pie.otf" id="4_aau6j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p5oh"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(0, 0, 83, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_288xa"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(83, 0, 83, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45by1"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(166, 0, 83, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ribj3"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(0, 90, 83, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcas6"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(83, 90, 83, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unrcs"]
+atlas = ExtResource("1_1wly8")
+region = Rect2(166, 90, 83, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdrs5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p5oh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_288xa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45by1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ribj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcas6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unrcs")
+}],
+"loop": true,
+"name": &"rotation",
+"speed": 9.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ocbx"]
+radius = 11.2898
+
+[sub_resource type="Animation" id="Animation_u7eew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_3dm8f"]
+resource_name = "scoreanim"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 4), Vector2(0, -54)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_756ku"]
+_data = {
+"RESET": SubResource("Animation_u7eew"),
+"scoreanim": SubResource("Animation_3dm8f")
+}
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(-24, -27)
+script = ExtResource("1_is4h6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(26, 28)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_xdrs5")
+animation = &"rotation"
+autoplay = "rotation"
+frame_progress = 0.0612428
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(26, 29)
+scale = Vector2(1.77876, 1.78058)
+shape = SubResource("CircleShape2D_3ocbx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ooit1")
+bus = &"pop"
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_top = 4.0
+offset_right = 46.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_aau6j")
+theme_override_font_sizes/font_size = 32
+text = "+50"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+"": SubResource("AnimationLibrary_756ku")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

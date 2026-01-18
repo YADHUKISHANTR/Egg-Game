@@ -1,0 +1,178 @@
+[gd_scene load_steps=10 format=3 uid="uid://deg05vl1uxeiq"]
+
+[ext_resource type="Script" path="res://Scripts/basket_test.gd" id="1_r8bms"]
+[ext_resource type="Texture2D" uid="uid://c5pprrajble2q" path="res://Assets/basket1.png" id="2_fhbcn"]
+
+[sub_resource type="Animation" id="Animation_03spj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:flip_v")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dqj3x"]
+resource_name = "invisible"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0c5f4"]
+resource_name = "rotation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_v")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_sw82a"]
+resource_name = "rotation_back"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_v")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_xf86m"]
+resource_name = "visible"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5466h"]
+_data = {
+"RESET": SubResource("Animation_03spj"),
+"invisible": SubResource("Animation_dqj3x"),
+"rotation": SubResource("Animation_0c5f4"),
+"rotation_back": SubResource("Animation_sw82a"),
+"visible": SubResource("Animation_xf86m")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbx5y"]
+size = Vector2(77, 19)
+
+[node name="Basket" type="Node2D"]
+z_index = 1
+script = ExtResource("1_r8bms")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_fhbcn")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_5466h")
+}
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+position = Vector2(65, 61)
+collision_mask = 5
+
+[node name="Left" type="RayCast2D" parent="Area2D"]
+position = Vector2(-30, -2)
+scale = Vector2(4, 4)
+target_position = Vector2(-8.25, 0.25)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="right" type="RayCast2D" parent="Area2D"]
+position = Vector2(31, -1)
+scale = Vector2(4, 4)
+target_position = Vector2(8, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3, 15.5)
+shape = SubResource("RectangleShape2D_xbx5y")
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.2
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 1.45
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

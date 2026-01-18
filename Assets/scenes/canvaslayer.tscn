@@ -1,0 +1,406 @@
+[gd_scene load_steps=14 format=3 uid="uid://db7aixelgt80j"]
+
+[ext_resource type="Script" path="res://Scripts/canvas_layer.gd" id="1_egtqk"]
+[ext_resource type="FontFile" uid="uid://beac1nd8e003m" path="res://Assets/CHICKEN Pie.otf" id="2_qt5ep"]
+[ext_resource type="Texture2D" uid="uid://b135gcdj02fgy" path="res://Assets/EggScoreSqure.png" id="3_4mkit"]
+[ext_resource type="Texture2D" uid="uid://bclllixhasl6v" path="res://Assets/eggLostScore.png" id="4_78tlr"]
+[ext_resource type="Texture2D" uid="uid://yicub8b4f8ye" path="res://Assets/EggFullScore.png" id="5_2oa6t"]
+[ext_resource type="Texture2D" uid="uid://du0kcjitbjcdg" path="res://Assets/RestartButton.png" id="6_s8sph"]
+[ext_resource type="Texture2D" uid="uid://c0s37jqd2hpmy" path="res://Assets/HomeButton.png" id="7_1bi4m"]
+[ext_resource type="Texture2D" uid="uid://co2mf42d7rh1h" path="res://Assets/ResumeButton.png" id="8_jwccq"]
+[ext_resource type="Texture2D" uid="uid://bf1bwuoia6jxw" path="res://Assets/PauseButton.png" id="8_q0qjd"]
+[ext_resource type="AudioStream" uid="uid://bjnf3ceknydyk" path="res://audio/Collect Item Sound Effect [TubeRipper.com].mp3" id="10_l3etj"]
+
+[sub_resource type="Animation" id="Animation_d4ly7"]
+resource_name = "PlusEgg"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(319, 385), Vector2(319, 211)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5lmae"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(292, 385)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g047s"]
+_data = {
+"PlusEgg": SubResource("Animation_d4ly7"),
+"RESET": SubResource("Animation_5lmae")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_egtqk")
+
+[node name="TimePassed" type="Label" parent="."]
+offset_left = 513.0
+offset_top = 59.0
+offset_right = 740.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 32
+text = "Time : "
+
+[node name="score" type="Label" parent="."]
+offset_left = 293.0
+offset_top = 62.0
+offset_right = 442.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 32
+text = "Score  :  0"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7, -11)
+scale = Vector2(0.533333, 0.5)
+texture = ExtResource("3_4mkit")
+centered = false
+
+[node name="lostegg" type="Node2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="Sprite2D" type="Sprite2D" parent="lostegg"]
+position = Vector2(38, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="lostegg"]
+position = Vector2(72, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="lostegg"]
+position = Vector2(106, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D4" type="Sprite2D" parent="lostegg"]
+position = Vector2(140, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D5" type="Sprite2D" parent="lostegg"]
+position = Vector2(174, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D6" type="Sprite2D" parent="lostegg"]
+position = Vector2(209, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D7" type="Sprite2D" parent="lostegg"]
+position = Vector2(38, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D8" type="Sprite2D" parent="lostegg"]
+position = Vector2(72, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D9" type="Sprite2D" parent="lostegg"]
+position = Vector2(106, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D10" type="Sprite2D" parent="lostegg"]
+position = Vector2(140, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D11" type="Sprite2D" parent="lostegg"]
+position = Vector2(174, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="Sprite2D12" type="Sprite2D" parent="lostegg"]
+position = Vector2(209, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("4_78tlr")
+
+[node name="eggsnum" type="Node2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="1" type="Sprite2D" parent="eggsnum"]
+position = Vector2(38, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="2" type="Sprite2D" parent="eggsnum"]
+position = Vector2(72, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="3" type="Sprite2D" parent="eggsnum"]
+position = Vector2(106, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="4" type="Sprite2D" parent="eggsnum"]
+position = Vector2(140, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="5" type="Sprite2D" parent="eggsnum"]
+position = Vector2(174, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="6" type="Sprite2D" parent="eggsnum"]
+position = Vector2(209, 37)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="7" type="Sprite2D" parent="eggsnum"]
+position = Vector2(38, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="8" type="Sprite2D" parent="eggsnum"]
+position = Vector2(72, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="9" type="Sprite2D" parent="eggsnum"]
+position = Vector2(106, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="10" type="Sprite2D" parent="eggsnum"]
+position = Vector2(140, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="11" type="Sprite2D" parent="eggsnum"]
+position = Vector2(174, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="12" type="Sprite2D" parent="eggsnum"]
+position = Vector2(209, 71.625)
+scale = Vector2(0.0817708, 0.0817708)
+texture = ExtResource("5_2oa6t")
+
+[node name="GameOver" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 335)
+
+[node name="Restart" type="Button" parent="GameOver"]
+process_mode = 2
+offset_left = 385.0
+offset_top = 541.0
+offset_right = 469.0
+offset_bottom = 621.0
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 64
+icon = ExtResource("6_s8sph")
+expand_icon = true
+
+[node name="Home" type="Button" parent="GameOver"]
+process_mode = 2
+offset_left = 270.0
+offset_top = 541.0
+offset_right = 348.0
+offset_bottom = 625.0
+icon = ExtResource("7_1bi4m")
+expand_icon = true
+
+[node name="GamerOver" type="Label" parent="GameOver"]
+offset_left = 94.0
+offset_top = 231.0
+offset_right = 644.0
+offset_bottom = 365.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="TotalScore" type="Label" parent="GameOver"]
+offset_left = 236.0
+offset_top = 368.0
+offset_right = 513.0
+offset_bottom = 430.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 40
+text = "score : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="GameOver"]
+offset_left = 261.0
+offset_top = 444.0
+offset_right = 475.0
+offset_bottom = 490.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 36
+text = "HighScore : 0"
+
+[node name="Pause" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 272)
+
+[node name="Label" type="Label" parent="Pause"]
+offset_left = 199.0
+offset_top = 367.0
+offset_right = 553.0
+offset_bottom = 515.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 100
+text = "Paused"
+
+[node name="Resume" type="Button" parent="Pause"]
+process_mode = 2
+offset_left = 12.0
+offset_top = 1189.0
+offset_right = 84.0
+offset_bottom = 1261.0
+icon = ExtResource("8_jwccq")
+
+[node name="Home" type="Button" parent="Pause"]
+process_mode = 2
+offset_left = 270.0
+offset_top = 541.0
+offset_right = 348.0
+offset_bottom = 625.0
+icon = ExtResource("7_1bi4m")
+expand_icon = true
+
+[node name="Restart" type="Button" parent="Pause"]
+process_mode = 2
+offset_left = 385.0
+offset_top = 541.0
+offset_right = 469.0
+offset_bottom = 621.0
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 64
+icon = ExtResource("6_s8sph")
+expand_icon = true
+
+[node name="pause" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 1460.0
+offset_right = 84.0
+offset_bottom = 1532.0
+icon = ExtResource("8_q0qjd")
+
+[node name="PlusEgg" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 292.0
+offset_top = 385.0
+offset_right = 402.0
+offset_bottom = 436.0
+theme_override_colors/font_color = Color(0, 0.739715, 1.92523e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_qt5ep")
+theme_override_font_sizes/font_size = 40
+text = "+1  Egg"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlusEgg"]
+deterministic = true
+libraries = {
+"": SubResource("AnimationLibrary_g047s")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PlusEgg"]
+stream = ExtResource("10_l3etj")
+bus = &"EggUp"
+
+[connection signal="pressed" from="GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Pause/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Pause/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]

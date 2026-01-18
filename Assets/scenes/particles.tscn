@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8q6dj64kfa7y"]
+
+[ext_resource type="Texture2D" uid="uid://jwbeq6tgyk14" path="res://Assets/light.png" id="1_50xrb"]
+[ext_resource type="Script" path="res://Scripts/particles.gd" id="1_ykr8w"]
+[ext_resource type="AudioStream" uid="uid://dhoo6iu0jfwtg" path="res://audio/Magic sound effect [TubeRipper.com].mp3" id="3_aharu"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ykr8w")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 4
+position = Vector2(0, -13)
+emitting = false
+amount = 200
+lifetime = 2.7
+one_shot = true
+speed_scale = 0.8
+explosiveness = 0.8
+randomness = 1.0
+lifetime_randomness = 0.8
+texture = ExtResource("1_50xrb")
+emission_shape = 2
+emission_sphere_radius = 90.0
+particle_flag_align_y = true
+direction = Vector2(1, 2)
+spread = 180.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+scale_amount_min = 0.01
+scale_amount_max = 0.02
+hue_variation_max = 0.5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="Eggrespawnaudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aharu")
+pitch_scale = 1.5
+bus = &"pop"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

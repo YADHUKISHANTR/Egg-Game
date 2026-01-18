@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://gli8yg3rubxv"]
+
+[ext_resource type="AudioStream" uid="uid://bjg4cym21y1e2" path="res://audio/Click - Sound Effect (HD) [TubeRipper.com].mp3" id="1_8rdlr"]
+[ext_resource type="Script" path="res://Scripts/button_click.gd" id="2_ea075"]
+
+[node name="ButtonClick" type="AudioStreamPlayer2D"]
+process_mode = 3
+stream = ExtResource("1_8rdlr")
+bus = &"EggUp"
+script = ExtResource("2_ea075")

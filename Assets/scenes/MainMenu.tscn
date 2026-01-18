@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvcl8hhfu77hd"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_kgdye"]
+[ext_resource type="Texture2D" uid="uid://b20f30v8dvqr6" path="res://Assets/background.jpg" id="1_o3m78"]
+[ext_resource type="FontFile" uid="uid://beac1nd8e003m" path="res://Assets/CHICKEN Pie.otf" id="2_g3m5e"]
+[ext_resource type="Texture2D" uid="uid://cfauphmv6m440" path="res://Assets/settingIcon.png" id="4_u7jut"]
+[ext_resource type="Texture2D" uid="uid://brxabhefhktnl" path="res://Assets/EggRespawnAnimation/speaker 2.png" id="5_nyy77"]
+[ext_resource type="Texture2D" uid="uid://dh8lg18q56jke" path="res://Assets/EggRespawnAnimation/MusicIcon 2.png" id="6_8cxjs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4ehg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1p0f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1s7yy"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_kgdye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.029, 0.823)
+texture = ExtResource("1_o3m78")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 1016)
+scale = Vector2(1.029, 0.823)
+texture = ExtResource("1_o3m78")
+centered = false
+flip_v = true
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 617.0
+offset_top = 71.0
+offset_right = 753.0
+offset_bottom = 207.0
+scale = Vector2(0.568374, 0.568374)
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t4ehg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h1p0f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1s7yy")
+icon = ExtResource("4_u7jut")
+expand_icon = true
+
+[node name="SettingsMenu" type="Node2D" parent="."]
+visible = false
+
+[node name="Sound" type="CheckButton" parent="SettingsMenu"]
+texture_filter = 1
+offset_left = 282.0
+offset_top = 379.0
+offset_right = 374.0
+offset_bottom = 428.0
+scale = Vector2(2.05603, 2.05214)
+button_pressed = true
+action_mode = 0
+icon = ExtResource("5_nyy77")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Music" type="CheckButton" parent="SettingsMenu"]
+process_mode = 3
+texture_filter = 1
+offset_left = 258.0
+offset_top = 500.0
+offset_right = 350.0
+offset_bottom = 549.0
+scale = Vector2(2.28159, 2.00159)
+button_pressed = true
+icon = ExtResource("6_8cxjs")
+expand_icon = true
+
+[node name="MainMenu" type="Node2D" parent="."]
+position = Vector2(0, 183)
+
+[node name="PlayButton" type="Button" parent="MainMenu"]
+offset_left = 248.0
+offset_top = 579.0
+offset_right = 497.0
+offset_bottom = 685.0
+theme_override_fonts/font = ExtResource("2_g3m5e")
+theme_override_font_sizes/font_size = 64
+text = "Play"
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="HighScore" type="Label" parent="MainMenu"]
+offset_left = 17.0
+offset_top = -78.0
+offset_right = 262.0
+offset_bottom = -30.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_g3m5e")
+theme_override_font_sizes/font_size = 38
+text = "High Score : 0"
+
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="toggled" from="SettingsMenu/Sound" to="." method="_on_sound_toggled"]
+[connection signal="toggled" from="SettingsMenu/Music" to="." method="_on_music_toggled"]
+[connection signal="pressed" from="MainMenu/PlayButton" to="." method="_on_play_button_pressed"]

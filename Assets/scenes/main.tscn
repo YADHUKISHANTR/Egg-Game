@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccjhjt1q5pisu"]
+
+[ext_resource type="PackedScene" uid="uid://deg05vl1uxeiq" path="res://scenes/baskettest.tscn" id="1_h8vdb"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_hatom"]
+[ext_resource type="PackedScene" uid="uid://ejcdeqdki0so" path="res://scenes/background.tscn" id="2_qlr8w"]
+[ext_resource type="PackedScene" uid="uid://bqxqekqpuw2fs" path="res://scenes/Egg.tscn" id="4_uhe7f"]
+[ext_resource type="FontFile" uid="uid://beac1nd8e003m" path="res://Assets/CHICKEN Pie.otf" id="5_80ea7"]
+[ext_resource type="PackedScene" uid="uid://db7aixelgt80j" path="res://scenes/canvaslayer.tscn" id="5_c1uap"]
+[ext_resource type="Texture2D" uid="uid://bl7t2i25g5r7a" path="res://Assets/start2.png" id="7_4quu1"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ik0ou"]
+normal = Vector2(1, 0)
+distance = 1.25
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_s746q"]
+normal = Vector2(-1, 0)
+distance = -1.51686
+
+[sub_resource type="GDScript" id="GDScript_on7q1"]
+script/source = "extends Camera2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Main" type="Node2D"]
+position = Vector2(-6, 3)
+script = ExtResource("1_hatom")
+cameraSpeed = 650
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_c1uap")]
+
+[node name="boundary" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boundary"]
+position = Vector2(-22, 756)
+scale = Vector2(4, 4)
+shape = SubResource("WorldBoundaryShape2D_ik0ou")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="boundary"]
+position = Vector2(712, 750)
+scale = Vector2(4, 4)
+shape = SubResource("WorldBoundaryShape2D_s746q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-11, -3)
+anchor_mode = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+script = SubResource("GDScript_on7q1")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_qlr8w")]
+
+[node name="Egg" parent="." instance=ExtResource("4_uhe7f")]
+z_index = 2
+position = Vector2(361, 1278)
+floor_constant_speed = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="Egg"]
+scale = Vector2(3, 3)
+target_position = Vector2(0.333328, 11.6667)
+
+[node name="StartBasket" parent="." instance=ExtResource("1_h8vdb")]
+position = Vector2(300, 1251)
+bsktfunc = "StaticBasket"
+
+[node name="Label" type="Label" parent="StartBasket"]
+offset_left = -128.0
+offset_top = -165.0
+offset_right = 267.0
+offset_bottom = -124.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("5_80ea7")
+theme_override_font_sizes/font_size = 32
+text = "press on screen to jump"
+
+[node name="Sprite2D2" type="Sprite2D" parent="StartBasket"]
+position = Vector2(63, -13.25)
+scale = Vector2(1.04425, 1.22674)
+texture = ExtResource("7_4quu1")
+
+[node name="Label2" type="Label" parent="StartBasket"]
+offset_left = 29.0
+offset_top = -54.0
+offset_right = 99.0
+offset_bottom = -24.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_80ea7")
+theme_override_font_sizes/font_size = 24
+text = "start"
+
+[node name="StartBasket2" parent="." instance=ExtResource("1_h8vdb")]
+position = Vector2(300, 761)
+bsktfunc = "MovingBasket"
+
+[node name="StartBasket3" parent="." instance=ExtResource("1_h8vdb")]
+position = Vector2(304, 271)
+bsktfunc = "MovingBasket"

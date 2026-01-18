@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://tnrbcmd6k8uy"]
+
+[ext_resource type="AudioStream" uid="uid://ce2kg68gf0veq" path="res://audio/Countryside Sounds Pt. 1 [TubeRipper.com].mp3" id="1_66127"]
+
+[node name="birds" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_66127")
+autoplay = true
+bus = &"birds"
