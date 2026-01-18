@@ -1,5 +1,16 @@
 # Egg-Game
 
+⚠️ IMPORTANT NOTICE
+
+This project is shared publicly for portfolio and learning purposes only.
+
+- The source code is NOT open for reuse or redistribution.
+- Publishing this project or any derivative work to app stores is strictly prohibited.
+- All rights are reserved by the author.
+
+If you are a recruiter or reviewer and need additional access or clarification,
+please contact me directly.
+
 # Description
 A casual arcade game inspired by a classic Flash game. Built to practice timing-based gameplay, scoring systems, and simple game loops.
 
