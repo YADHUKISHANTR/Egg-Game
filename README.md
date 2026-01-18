@@ -17,6 +17,8 @@ https://drive.google.com/drive/folders/1zA89uHby172kA80EDelkAuGUwkv_1Cic?usp=sha
 -Input handling
 -Scene Management
 -Score tracking
+-Collision Handling
+-And More...
 
 ## Statuc
 Completed
