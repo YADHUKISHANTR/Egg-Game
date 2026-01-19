@@ -1,4 +1,4 @@
-# Egg-Game
+# Egg-Jump
 
 ⚠️ IMPORTANT NOTICE
 
